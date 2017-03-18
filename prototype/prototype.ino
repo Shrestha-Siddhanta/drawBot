@@ -1,6 +1,7 @@
 // 
 
 #include <Servo.h>
+#include <Stepper.h>
 
 // setup servo
 int servoPin = 8;
@@ -47,19 +48,19 @@ void setup() {
 
 
 void loop(){ // draw a calibration box 4 times
-/// print "A"
-//  for(int y=0;y<4;y++){
-//    forward(60);
-//    right(90);
-//    forward(20);
-//    right(90);
-//    forward(60);
-//    backward(40);
-//    right(90);
-//    forward(20);
-//  } 
+// print "A"
+  for(int y=0;y<4;y++){
+    forward(60);
+    right(90);
+    forward(20);
+    right(90);
+    forward(60);
+    backward(40);
+    right(90);
+    forward(20);
+  } 
 
-    circle();
+//    circle( 200, 1000);
 
 //  penup();
   done();      // releases stepper motor
@@ -170,11 +171,15 @@ void pendown(){
   delay(250);
 }
 
-void circle(int sensorReading_L,  int sensorReading_R = 1020;
+void circle(int l,  int r
  ){
+  // initialize the stepper library on pins :
+  Stepper myStepper_L(steps_rev, 12, 10, 9, 11);
+  Stepper myStepper_R(steps_rev, 4, 6, 7, 5);
+  int stepCount = 0;  // number of steps the motor has taken
     // read the sensor value:
-  int sensorReading_L = 500;
-  int sensorReading_R = 1020;
+  int sensorReading_L = l;
+  int sensorReading_R = r;
   // map it to a range from 0 to 100:
   int motorSpeed_L = map(sensorReading_L, 0, 1023, 0, 100);
   int motorSpeed_R = map(sensorReading_R, 0, 1023, 0, 100);
@@ -183,6 +188,7 @@ void circle(int sensorReading_L,  int sensorReading_R = 1020;
     myStepper_L.setSpeed(motorSpeed_L);
     myStepper_R.setSpeed(motorSpeed_R);
     // step 1/100 of a revolution:
-    myStepper_L.step(stepsPerRevolution / 100);
-    myStepper_R.step(stepsPerRevolution / 100);
-  }}
+    myStepper_L.step(steps_rev / 100);
+    myStepper_R.step(steps_rev / 100);
+  }
+  }
