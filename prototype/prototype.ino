@@ -50,14 +50,18 @@ void setup() {
 void loop(){ // draw a calibration box 4 times
 // print "A"
   for(int y=0;y<4;y++){
-    forward(60);
+    left(90);
+    forward(60);  //leftside
+    right(90);  
+    forward(20);  //top
     right(90);
-    forward(20);
+    forward(30);  //rightside
     right(90);
-    forward(60);
-    backward(40);
-    right(90);
-    forward(20);
+    forward(20); //A BAR
+    backward(20);
+    left(90);
+    forward(30);  //rightside
+    left(90);
   } 
 
 //    circle( 200, 1000);
