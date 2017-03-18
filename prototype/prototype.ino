@@ -63,7 +63,25 @@ void loop(){ // draw a calibration box 4 times
     forward(30);  //rightside
     left(90);
   } 
-
+  
+/// print "B"
+//  for(int y=0;y<4;y++){
+//    forward(30);
+//    backward(30);
+//    left(90);
+//    forward(60);
+//    right(90);
+//    forward(15);
+//    right(90);
+//    forward(30);
+//    right(90);
+//    forward(15);
+//    backward(20);
+//    left(90);
+//    forward(30);
+//    left(90);
+//  }
+  
 //    circle( 200, 1000);
 
 //  penup();
