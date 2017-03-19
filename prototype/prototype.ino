@@ -14,6 +14,7 @@ float wheel_base=122; //    # mm (increase = spiral in, ccw)
 int steps_rev=128; //        # 512 for 64x gearbox, 128 for 16x gearbox
 int delay_time=5; //         # time between steps in ms
 
+//letters start at bottom left corner and end at bottom right corner
 float letter_hi=60; // height of letter
 float letter_wi=30; // width of letter
 
@@ -109,7 +110,7 @@ void loop(){ // draw a calibration box 4 times
     right(90);
     forward(letter_wi); //P BAR
     //letter is complete, need to lift pen and move to 'end point'
-    //penup
+    //penup();
     //backward(letter_wi);
     //left(90);
     //forward(.5*letter_hi);  //rightside
