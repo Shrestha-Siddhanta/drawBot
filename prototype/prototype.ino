@@ -14,6 +14,9 @@ float wheel_base=122; //    # mm (increase = spiral in, ccw)
 int steps_rev=128; //        # 512 for 64x gearbox, 128 for 16x gearbox
 int delay_time=5; //         # time between steps in ms
 
+float letter_hi=60; // height of letter
+float letter_wi=30; // width of letter
+
 // Stepper sequence org->pink->blue->yel
 int R_stepper_pins[]= {12, 10, 9, 11};
 int L_stepper_pins[] = {4, 6, 7, 5};
@@ -39,7 +42,7 @@ void setup() {
     digitalWrite(R_stepper_pins[pin], LOW);
   }
   penServo.attach(servoPin);
-  Serial.println("setup");
+  Serial.println("setup"
   
   penup();
   
@@ -51,36 +54,67 @@ void loop(){ // draw a calibration box 4 times
 // print "A"
   for(int y=0;y<4;y++){
     left(90);
-    forward(60);  //leftside
+    forward(letter_hi);  //leftside
     right(90);  
-    forward(20);  //top
+    forward(letter_wi);  //top
     right(90);
-    forward(30);  //rightside
+    forward(.5*letter_hi);  //rightside
     right(90);
-    forward(20); //A BAR
-    backward(20);
+    forward(letter_wi); //A BAR
+    backward(letter_wi);
     left(90);
-    forward(30);  //rightside
+    forward(.5*letter_hi);  //rightside
     left(90);
   } 
   
 /// print "B"
 //  for(int y=0;y<4;y++){
-//    forward(30);
-//    backward(30);
+//    forward(letter_wi);
+//    backward(letter_wi);
 //    left(90);
-//    forward(60);
+//    forward(letter_hi);
 //    right(90);
-//    forward(15);
+//    forward(.75*letter_wi);
 //    right(90);
-//    forward(30);
+//    forward(.5*letter_hi);
 //    right(90);
-//    forward(15);
-//    backward(20);
+//    forward(.75*letter_wi);
+//    backward(letter_wi);
 //    left(90);
-//    forward(30);
+//    forward(.5*letter_hi);
 //    left(90);
 //  }
+  
+  // print "O"
+  for(int y=0;y<4;y++){
+    forward(letter_wi);  //bottom
+    backward(letter_wi);
+    left(90);  
+    forward(letter_hi);  //rightside
+    right(90);
+    forward(letter_wi); //top
+    right(90);
+    forward(letter_hi); //leftside
+    left(90);
+  }
+  
+  // print "P"
+  for(int y=0;y<4;y++){
+    left(90);
+    forward(letter_hi);  //leftside
+    right(90);  
+    forward(letter_wi);  //top
+    right(90);
+    forward(.5*letter_hi);  //rightside
+    right(90);
+    forward(letter_wi); //P BAR
+    //letter is complete, need to lift pen and move to 'end point'
+    //penup
+    //backward(letter_wi);
+    //left(90);
+    //forward(.5*letter_hi);  //rightside
+    //left(90);
+  } 
   
 //    circle( 200, 1000);
 
