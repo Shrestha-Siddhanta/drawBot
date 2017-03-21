@@ -1,26 +1,25 @@
-// 
+
 
 #include <Servo.h>
-#include <Stepper.h>
 
 // setup servo
 int servoPin = 8;
-int PEN_DOWN = 0; // angle of servo when pen is down
-int PEN_UP = 180;   // angle of servo when pen is up
+int PEN_DOWN = 20; // angle of servo when pen is down
+int PEN_UP = 110;   // angle of servo when pen is up
 Servo penServo;
 
-float wheel_dia=63; //    # mm (increase = spiral out)
-float wheel_base=122; //    # mm (increase = spiral in, ccw) 
+float wheel_dia=62; //    # mm (increase = spiral out)
+float wheel_base=120; //    # mm (increase = spiral in, ccw) 
 int steps_rev=128; //        # 512 for 64x gearbox, 128 for 16x gearbox
-int delay_time=5; //         # time between steps in ms
-
-//letters start at bottom left corner and end at bottom right corner
-float letter_hi=60; // height of letter
-float letter_wi=30; // width of letter
+int delay_time=6; //         # time between steps in ms
+//
+////letters start at bottom left corner and end at bottom right corner
+//float letter_hi=60; // height of letter
+//float letter_wi=30; // width of letter
 
 // Stepper sequence org->pink->blue->yel
-int R_stepper_pins[]= {12, 10, 9, 11};
-int L_stepper_pins[] = {4, 6, 7, 5};
+int L_stepper_pins[] = {12, 10, 9, 11};
+int R_stepper_pins[] = {4, 6, 7, 5};
 
 int fwd_mask[][4] =  {{1, 0, 1, 0},
                       {0, 1, 1, 0},
@@ -43,82 +42,77 @@ void setup() {
     digitalWrite(R_stepper_pins[pin], LOW);
   }
   penServo.attach(servoPin);
-  Serial.println("setup"
+  Serial.println("setup");
   
-  penup();
+//  penup();
   
-  delay(500);
+  delay(1000);
 }
 
 
 void loop(){ // draw a calibration box 4 times
-// print "A"
-  for(int y=0;y<4;y++){
-    left(90);
-    forward(letter_hi);  //leftside
+//   pendown();
+//    for(int y = 0; y<8; y++){
+//      forward(30);
+//      right(90);
+//    }
+////    penup();
+//    right(90);
+//    forward(60);
+//    left(90);
+//
+//   
+   // Print P
+   //pendown();
+    forward(60);  //leftside
     right(90);  
-    forward(letter_wi);  //top
+    forward(30);  //top
     right(90);
-    forward(.5*letter_hi);  //rightside
+    forward(30);  //rightside
     right(90);
-    forward(letter_wi); //A BAR
-    backward(letter_wi);
+    forward(32); 
+//    penup();
     left(90);
-    forward(.5*letter_hi);  //rightside
+    forward(30);  //rightside
     left(90);
-  } 
-  
-/// print "B"
-//  for(int y=0;y<4;y++){
-//    forward(letter_wi);
-//    backward(letter_wi);
-//    left(90);
-//    forward(letter_hi);
-//    right(90);
-//    forward(.75*letter_wi);
-//    right(90);
-//    forward(.5*letter_hi);
-//    right(90);
-//    forward(.75*letter_wi);
-//    backward(letter_wi);
-//    left(90);
-//    forward(.5*letter_hi);
-//    left(90);
-//  }
-  
-  // print "O"
-  for(int y=0;y<4;y++){
-    forward(letter_wi);  //bottom
-    backward(letter_wi);
-    left(90);  
-    forward(letter_hi);  //rightside
-    right(90);
-    forward(letter_wi); //top
-    right(90);
-    forward(letter_hi); //leftside
+    forward(50);
+    
+    
+    //// print "A"
     left(90);
-  }
-  
-  // print "P"
-  for(int y=0;y<4;y++){
-    left(90);
-    forward(letter_hi);  //leftside
+//    pendown();
+    forward(60);  //leftside
     right(90);  
-    forward(letter_wi);  //top
+    forward(30);  //top
     right(90);
-    forward(.5*letter_hi);  //rightside
+    forward(30);  //rightside
     right(90);
-    forward(letter_wi); //P BAR
-    //letter is complete, need to lift pen and move to 'end point'
-    //penup();
-    //backward(letter_wi);
-    //left(90);
-    //forward(.5*letter_hi);  //rightside
-    //left(90);
-  } 
-  
-//    circle( 200, 1000);
+    forward(35); //A BAR
+    backward(35);
+    left(90);
+    forward(30);  //rightside
+    left(90);
+    
+//    penup();
+    forward(20);
+//    pendown();
 
+  // print "O"
+
+    forward(30);  //bottom
+    backward(30);
+    left(90);  
+    forward(60);  //rightside
+    right(90);
+    forward(30); //top
+    right(90);
+    forward(60); //leftside
+    left(90);
+//    penup();
+
+
+    
+       
 //  penup();
   done();      // releases stepper motor
   while(1);    // wait for reset
@@ -128,7 +122,7 @@ void loop(){ // draw a calibration box 4 times
 // ----- HELPER FUNCTIONS -----------
 int step(float distance){
   int steps = distance * steps_rev / (wheel_dia * 3.1412); //24.61
-  
+  /*
   Serial.print(distance);
   Serial.print(" ");
   Serial.print(steps_rev);
@@ -136,7 +130,7 @@ int step(float distance){
   Serial.print(wheel_dia);
   Serial.print(" ");  
   Serial.println(steps);
-  delay(1000);
+  delay(1000);*/
   return steps;  
 }
 
@@ -214,38 +208,17 @@ void done(){ // unlock stepper to save battery
 
 
 void penup(){
-  delay(250);
+  delay(200);
   Serial.println("PEN_UP()");
-  penServo.write(PEN_UP);
-  delay(250);
+  penServo.write(110);
+  delay(200);
 }
 
 
 void pendown(){
-  delay(250);  
+  delay(200);  
   Serial.println("PEN_DOWN()");
-  penServo.write(PEN_DOWN);
-  delay(250);
+  penServo.write(20);
+  delay(200);
 }
 
-void circle(int l,  int r
- ){
-  // initialize the stepper library on pins :
-  Stepper myStepper_L(steps_rev, 12, 10, 9, 11);
-  Stepper myStepper_R(steps_rev, 4, 6, 7, 5);
-  int stepCount = 0;  // number of steps the motor has taken
-    // read the sensor value:
-  int sensorReading_L = l;
-  int sensorReading_R = r;
-  // map it to a range from 0 to 100:
-  int motorSpeed_L = map(sensorReading_L, 0, 1023, 0, 100);
-  int motorSpeed_R = map(sensorReading_R, 0, 1023, 0, 100);
-  // set the motor speed:
-  if (motorSpeed_L > 0 && motorSpeed_R > 0  ) {
-    myStepper_L.setSpeed(motorSpeed_L);
-    myStepper_R.setSpeed(motorSpeed_R);
-    // step 1/100 of a revolution:
-    myStepper_L.step(steps_rev / 100);
-    myStepper_R.step(steps_rev / 100);
-  }
-  }
