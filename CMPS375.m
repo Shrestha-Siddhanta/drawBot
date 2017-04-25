@@ -21,15 +21,15 @@ imshow(outImg);
 title('Binary');
 
 
-% M = outImg;
-% fid = fopen('Selu30Matrix.txt', 'w+');
-% for i=1:size(M, 1)
-%     fprintf(fid, '{');
-%     fprintf(fid, '%d, ', M(i,1:29));
-%     fprintf(fid, '%d ', M(i,30:30));
-%     fprintf(fid, '}\n');
-% end
-% fclose(fid);
+ M = outImg;
+ fid = fopen('Selu30Matrix.txt', 'w+');
+ for i=1:size(M, 1)
+     fprintf(fid, '{');
+     fprintf(fid, '%d, ', M(i,1:29));
+     fprintf(fid, '%d ', M(i,30:30));
+     fprintf(fid, '}\n');
+ end
+ fclose(fid);
 
 
 %rle
