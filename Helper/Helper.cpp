@@ -3,12 +3,12 @@
 #include "Helper.h"
 
  float wheel_dia=62; //    # mm (increase = spiral out)
- float wheel_base=120; //    # mm (increase = spiral in, ccw) 
+ float wheel_base=121; //    # mm (increase = spiral in, ccw) 
  int steps_rev=128; //        # 512 for 64x gearbox, 128 for 16x gearbox
- int delay_time=6; //         # time between steps in ms
+ int delay_time=10; //         # time between steps in ms
 
  int PEN_DOWN = 20; // angle of servo when pen is down
- int PEN_UP = 110;   // angle of servo when pen is up
+ int PEN_UP = 120;   // angle of servo when pen is up
  Servo penServo;
 int L_stepper_pins[] = {12, 10, 9, 11};
  int R_stepper_pins[] = {4, 6, 7, 5};
@@ -16,7 +16,7 @@ int L_stepper_pins[] = {12, 10, 9, 11};
 //float letter_hi=60; // height of letter
 //float letter_wi=30; // width of letter
 
- int fwd_mask[][4] =  {{1, 0, 1, 0},
+ int fwd_mask[][4] =  {{1, 0, 1, 0}, 
                       {0, 1, 1, 0},
                       {0, 1, 0, 1},
                       {1, 0, 0, 1}};
@@ -80,7 +80,7 @@ void Helper::right(float degrees){
         digitalWrite(R_stepper_pins[pin], rev_mask[mask][pin]);
         digitalWrite(L_stepper_pins[pin], rev_mask[mask][pin]);
       }
-      delay(delay_time);
+      delay(delay_time+5);
     } 
   }   
 }
@@ -95,7 +95,7 @@ void Helper::left(float degrees){
         digitalWrite(R_stepper_pins[pin], fwd_mask[mask][pin]);
         digitalWrite(L_stepper_pins[pin], fwd_mask[mask][pin]);
       }
-      delay(delay_time);
+      delay(delay_time+5);
     } 
   }   
 }

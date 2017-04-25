@@ -17,69 +17,79 @@ void setup() {
   }
   helper.penServo.attach(servoPin);
   Serial.println("setup");
-//  penup();
+  helper.penup();
   delay(1000);
 }
 
-void loop(){ // draw a calibration box 4 times
-//   pendown();
-//    for(int y = 0; y<8; y++){
-//      forward(30);
-//      right(90);
-//    }
-////    penup();
-//    right(90);
-//    forward(60);
-//    left(90);
+void loop(){ 
+    for(int i = 1; i <=4;i++){
+        helper.pendown();
+        helper.forward(60);
+        helper.penup();
+        helper.left(90);
+        helper.pendown();
+        helper.forward(60);
+         helper.penup();
+        helper.left(90);
+         helper.pendown();
+        helper.forward(60);
+         helper.penup();
+        helper.left(90);
+         helper.pendown();
+        helper.forward(60);
+        helper.penup();
+        helper.left(90);
+        
+    }
 //
 //   
-   // Print P
-   //pendown();
-    helper.forward(60);  //leftside
-    helper.right(90);  
-    helper.forward(30);  //top
-    helper.right(90);
-    helper.forward(30);  //rightside
-    helper.right(90);
-    helper.forward(32); 
-//    penup();
-    helper.left(90);
-    helper.forward(30);  //rightside
-    helper.left(90);
-    helper.forward(50);
-    
-    
-    //// print "A"
-    helper.left(90);
-//    pendown();
-    helper.forward(60);  //leftside
-    helper.right(90);  
-    helper.forward(30);  //top
-    helper.right(90);
-    helper.forward(30);  //rightside
-    helper.right(90);
-    helper.forward(35); //A BAR
-    helper.backward(35);
-    helper.left(90);
-    helper.forward(30);  //rightside
-    helper.left(90);
-    
-//    penup();
-    helper.forward(20);
-//    pendown();
-
-  // print "O"
-    helper.forward(30);  //bottom
-    helper.backward(30);
-    helper.left(90);  
-    helper.forward(60);  //rightside
-    helper.right(90);
-    helper.forward(30); //top
-    helper.right(90);
-    helper.forward(60); //leftside
-    helper.left(90);
-//    penup();
-//  penup();
+//   // Print P
+//    helper.pendown();
+//    helper.forward(60);  //leftside
+//    helper.right(90);  
+//    helper.forward(30);  //top
+//    helper.right(90);
+//    helper.forward(30);  //rightside
+//    helper.right(90);
+//    helper.forward(32); 
+//    helper.penup();
+//    helper.left(90);
+//    helper.forward(30);  //rightside
+//    helper.left(90);
+//    helper.forward(50);
+//    
+//    
+//    //// print "A"
+//    helper.left(90);
+//    helper.pendown();
+//    helper.forward(60);  //leftside
+//    helper.right(90);  
+//    helper.forward(30);  //top
+//    helper.right(90);
+//    helper.forward(30);  //rightside
+//    helper.right(90);
+//    helper.forward(35); //A BAR
+//    helper.backward(35);
+//    helper.left(90);
+//    helper.forward(30);  //rightside
+//    helper.left(90);
+//    
+////    penup();
+//    helper.forward(20);
+////    pendown();
+//
+//  // print "O"
+//    helper.forward(30);  //bottom
+//    helper.backward(30);
+//    helper.left(90);  
+//    helper.forward(60);  //rightside
+//    helper.right(90);
+//    helper.forward(30); //top
+//    helper.right(90);
+//    helper.forward(60); //leftside
+//    helper.left(90);
+////    penup();
+////  penup();
     helper.done();      // releases stepper motor
     while(1);    // wait for reset
 }
