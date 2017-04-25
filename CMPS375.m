@@ -1,9 +1,9 @@
-myImg = imread('pinkheart.png');
-imshow(myImg);
+myOrg = imread('pinkheart.png');
+imshow(myOrg);
 title('Original Image');
 
 %resize image
-myImg = imresize(myImg, [20 20]);
+myImg = imresize(myOrg, [20 20]);
 imshow(myImg); 
 title('Resized');
 
@@ -21,13 +21,15 @@ imshow(outImg);
 title('Binary');
 
 
-M = outImg;
-fid = fopen('heart.txt', 'w+');
-for i=1:size(M, 1)
-    fprintf(fid, '%f ', M(i,:));
-    fprintf(fid, '\n');
-end
-fclose(fid);
+% M = outImg;
+% fid = fopen('Selu30Matrix.txt', 'w+');
+% for i=1:size(M, 1)
+%     fprintf(fid, '{');
+%     fprintf(fid, '%d, ', M(i,1:29));
+%     fprintf(fid, '%d ', M(i,30:30));
+%     fprintf(fid, '}\n');
+% end
+% fclose(fid);
 
 
 %rle
